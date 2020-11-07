@@ -38,6 +38,15 @@ def send_image_wassenger(destination, image_id, image_caption):
     url = "https://api.wassenger.com/v1/messages"
     resp = post_json(url, json_data)
     print(resp)
+def send_text_wassenger(destination, message):
+    phone = destination
+    json_data = {
+        "phone": destination,
+        "message": message,
+    }
+    url = "https://api.wassenger.com/v1/messages"
+    resp = post_json(url, json_data)
+    print(resp)
 def upload_to_s3(filename, s3_parameter):
     neo_bucket = s3_parameter['s3_bucket']
     head, base_filename = os.path.split(filename)
@@ -72,6 +81,17 @@ def current_dir_to_list():
                  os.path.splitext(f)[1] == '.jpg']
     return files
 # def upload_to_wa(url):
+def send_mesage(msisdn, image_id):
+    msg = "Selamat siang kakak, saya Lisa dari kartunama.net\n\n"
+    msg = msg + "Sebelumnya kakak atau HRD kakak pernah cetak kartunama ini di kita. Karena lagi WFH, mungkin kakak tidak bisa bertemu orang dan tidak bisa kasih kartunama fisik.\n\n"
+    msg = msg + "Jadi ini Lisa kirim ke kakak kartunama digital ya, sesuai gambar yang ada di kita. Silakan kartunama digital ini dipakai sepuasnya.\n\n"
+    send_image_wassenger(msisdn, image_id, msg)
+    msg = "Kalau kartunama ini sudah tidak sesuai dengan yang sekarang, mohon maaf. Tapi kakak foto aja kartunama yg sekrang dan kirim ke nomor ini nanti Lisa minta tim desain buatin digitalnya dan dikirimkan lagi untuk kakak.\n\n"
+    send_text_wassenger(msisdn, msg)
+    msg = "O iya, covid ini kita juga kena impact nih 😀. Kalo kakak mau cetak kartunamanya kasih tahu ke Lisa aja ya. Bisa Lisa bantu kirim pakai Gojek atau Grab.\n\n"
+    msg = msg + "Terima kash lagi ya kakak, semoga kartunama digitalnya berguna. Salam hangat dan sehat selalu. 🙍‍♀️"
+    send_text_wassenger(msisdn, msg)
+
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
@@ -107,21 +127,14 @@ def print_hi(name):
             if resp['status'] == 409:
                 id = resp["meta"]["file"]
         print(f"   id: {id}")
-        msg = "Selamat siang kakak, saya Lisa dari kartunama.net\n\n"
-        msg = msg + "Sebelumnya kakak atau HRD kakak pernah cetak kartunama ini di kita.\n\n"
-        msg = msg + "Karena lagi WFH, mungkin kakak tidak bisa bertemu orang dan tidak bisa kasih kartunama fisik.\n\n"
-        msg = msg + "Jadi ini Lisa kirim ke kakak kartunama digital ya, sesuai gambar yang ada di kita. Silakan kartunama digital ini dipakai sepuasnya.\n\n"
-        msg = msg + "Kalau kartunama ini sudah tidak sesuai dengan yang sekarang, mohon maaf. Tapi jangan khawatir, kakak foto saja kirim ke nomor ini nanti kita buatin digitalnya dan kita kirimkan lagi untuk kakak.\n\n"
-        msg = msg + "O iya, covid ini kita juga kena impact nih 😀. Kalo kakak mau cetak kartunamanya kasih tahu ke Lisa aja ya.\n\n"
-        msg = msg + "Terima kasih lagi ya kakak, semoga kartunama digitalnya berguna. Salam dari Lisa. 🙍‍♀️"
         msisdn = "+628119502673"
-        send_image_wassenger(msisdn, id, msg)
+        send_mesage(msisdn,id)
         msisdn = "+62811811889"
-        send_image_wassenger(msisdn, id, msg)
+        send_mesage(msisdn,id)
         msisdn = "+628118074696"
-        send_image_wassenger(msisdn, id, msg)
+        send_mesage(msisdn,id)
         msisdn = "+62818809609"
-        send_image_wassenger(msisdn, id, msg)
+        send_mesage(msisdn,id)
 
     # print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
 
