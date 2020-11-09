@@ -84,20 +84,18 @@ def current_dir_to_list():
 # def upload_to_wa(url):
 def send_mesage(msisdn, image_id):
     msg = "Halo kak,aku Lisa dari Kartunama.net dan ini adalah Kartu Nama Digital kakak yang aku ambil dari data kita.\n\n"
+    msg = msg + "Untuk mendukung aktifitas bisnis kakak di era New Normal, kakak bisa forward Kartu Nama Digital ini saat meeting online. Tukar kartu nama itu kesannya lebih professional dan lebih melekat.\n\n"
     send_image_wassenger(msisdn, image_id, msg)
-    time.sleep(5)
-    msg = "Untuk mendukung aktifitas bisnis kakak di era New Normal, kakak bisa forward Kartu Nama Digital ini saat meeting online. Tukar kartu nama itu kesannya lebih professional dan lebih melekat.\n\n"
-    send_text_wassenger(msisdn, msg)
-    time.sleep(2)
+    time.sleep(2)    # time.sleep(2)
     msg = "Btw mohon maaf kalau kartu namanya nggak update dengan pekerjaan kakak sekarang. Tapi Lisa bisa buatin yang baru koq, cukup balas pesan ini dengan foto dari kartu nama terbaru kakak. Nanti yang versi digital terbaru akan Lisa kirim lagi.\n\n"
-    send_text_wassenger(msisdn, msg)
-    time.sleep(5)
-    msg = "Terima kasih ya sudah jadi pelanggan di kartunama.net, sehat dan sukses selalu :)\n\n"
+    msg = msg + "Terima kasih ya sudah jadi pelanggan di kartunama.net, sehat dan sukses selalu :)\n\n"
     msg = msg + "Salam, \nLisa 🙍‍♀️"
     send_text_wassenger(msisdn, msg)
-    time.sleep(25)
-    msg = "O iya, kalau kakak mau cetak kasih tahu Lisa aja kak. Nanti di bantu juga kirim pakai Gojek atau Grab. Makasi yah kak.\n\n"
-    send_text_wassenger(msisdn, msg)
+    # time.sleep(5)
+    # send_text_wassenger(msisdn, msg)
+    # time.sleep(25)
+    # msg = "O iya, kalau kakak mau cetak kasih tahu Lisa aja kak. Nanti di bantu juga kirim pakai Gojek atau Grab. Makasi yah kak.\n\n"
+    # send_text_wassenger(msisdn, msg)
 
 
 def print_hi(name):
@@ -112,9 +110,9 @@ def print_hi(name):
         's3_path': 'images',
         's3_bucket': 'wabroadcast'
     }
-    start = 0
+    start = 21
     counter = 0
-    total = 10
+    total = 20
     for file in files:
         print(f" [{counter}] Processing file {file} ...")
         if start <= counter:
@@ -141,7 +139,9 @@ def print_hi(name):
             token = base_filename.split(".")
             destination = f"+{token[0]}"
             print(f"   send to {destination}")
-            msisdn = "+628119502673"
+            msisdn = destination
+            # msisdn = "+628119502673"
+            send_mesage(msisdn,id)
             # send_mesage(msisdn,id)
             # msisdn = "+62811811889"
             # send_mesage(msisdn,id)
